@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 102647794}
   - component: {fileID: 102647796}
   - component: {fileID: 102647797}
+  - component: {fileID: 102647798}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -158,6 +159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1393556939}
+  - {fileID: 604509228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &102647792
@@ -175,7 +177,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -219,8 +221,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6536181, y: 0.81207085}
-  m_Size: {x: 0.61883974, y: 1.6091704}
+  m_Offset: {x: -0.6536181, y: 0.80803704}
+  m_Size: {x: 0.61883974, y: 1.617238}
   m_Direction: 0
 --- !u!212 &102647794
 SpriteRenderer:
@@ -307,9 +309,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34361c62a68666e4a8ef68839e2489e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 4.5
+  jumpForce: 10
   rb: {fileID: 102647792}
   characterAnimation: {fileID: 102647797}
+  characterAttack: {fileID: 102647798}
+  groundCheckLength: 0.14
+  groundCheck: {fileID: 604509228}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  isGrounded: 0
 --- !u!114 &102647797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +333,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1393556937}
+--- !u!114 &102647798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102647790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbe6ef551962c64a8e3bb19a1d06bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterAnimation: {fileID: 102647797}
 --- !u!1 &454344413
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +357,7 @@ GameObject:
   - component: {fileID: 454344416}
   - component: {fileID: 454344415}
   - component: {fileID: 454344414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,6 +568,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &604509227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604509228}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604509228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604509227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.704, y: 0.058, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 102647791}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &604616671
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +610,7 @@ GameObject:
   - component: {fileID: 604616672}
   - component: {fileID: 604616674}
   - component: {fileID: 604616673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1081,7 @@ GameObject:
   - component: {fileID: 2100869850}
   - component: {fileID: 2100869852}
   - component: {fileID: 2100869851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,8 +1097,8 @@ Transform:
   m_GameObject: {fileID: 2100869849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.9, y: -1.0266, z: 0}
-  m_LocalScale: {x: 3.067442, y: 3.067442, z: 3.067442}
+  m_LocalPosition: {x: 5.9, y: -1.24, z: 0}
+  m_LocalScale: {x: 2.8776593, y: 2.5898933, z: 2.8776593}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 866767823}
