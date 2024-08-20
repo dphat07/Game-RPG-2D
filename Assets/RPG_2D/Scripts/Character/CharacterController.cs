@@ -93,9 +93,9 @@ public class CharacterController : MonoBehaviour
 
     private void PlayerAttack()
     {
-        if (isGrounded)
+        if (isGrounded && velocity.x == 0)
         {
-            if (Input.GetKeyDown(KeyCode.Q) && velocity.x == 0) 
+            if (Input.GetKeyDown(KeyCode.Q)) 
             {
                 characterAttack.Attack();
             }
