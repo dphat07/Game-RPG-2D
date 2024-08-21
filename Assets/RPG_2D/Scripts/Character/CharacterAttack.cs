@@ -6,6 +6,8 @@ public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private CharacterAnimation characterAnimation;
 
+
+    [SerializeField] private int normalDamage;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform normalAttackPos;
     [SerializeField] private float normalAttackRange;
@@ -22,6 +24,8 @@ public class CharacterAttack : MonoBehaviour
         foreach (var collider in colliders)
         {
             Debug.Log("Attack to: " + collider.name);
+            UnitHealth healthEnemy = collider.GetComponent<UnitHealth>();
+            healthEnemy.TakeDamage(normalDamage);
           
         }
 
